@@ -1,5 +1,5 @@
 <!--index.wxml-->
-<button form-type='button' bindtap="btnClick" type='primary' style="width: 100%;">查询</button>
+<!-- <button form-type='button' bindtap="btnClick" type='primary' style="width: 100%;">查询</button> -->
 <view class="weui-search-bar">
     <view class="weui-search-bar__form">
     <!-- 搜索框 -->
@@ -10,21 +10,19 @@
     </view>
 </view>
 <view class="table">
-  <view class="tr bg-w">
+  <view class="tr_first bg-w">
     <view class="th">head1</view>
     <view class="th">head2</view>
     <view class="th ">head3</view>
   </view>
   <block wx:for="{{words}}" wx:key="k">
     <view class="tr bg-g" wx:if="{{index % 2 == 0}}" data-item="{{item}}" bindtap="wordClick">
-      <view class="td">{{item.k}}</view>
-      <view class="td">{{item.v}}</view>
-      <view class="td">{{item.type}}</view>
+      <view class="td_k">{{item.k}}</view>
+      <view class="td_v">{{item.v}}</view>
     </view>
-    <view class="tr" wx:else bindtap="wordClick">
-      <view class="td">{{item.k}}</view>
-      <view class="td">{{item.v}}</view>
-      <view class="td">{{item.type}}</view>
+    <view class="tr" wx:else data-item="{{item}}" bindtap="wordClick">
+      <view class="td_k">{{item.k}}</view>
+      <view class="td_v">{{item.v}}</view>
     </view>
   </block>
 </view>

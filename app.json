@@ -1,14 +1,32 @@
 {
   "pages": [
+    "pages/recite/recite",
     "pages/index/index",
-    "pages/logs/logs",
-    "pages/recite/recite"
+    "pages/logs/logs"
+    
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "black"
+    "navigationBarBackgroundColor": "#6ab200",
+    "navigationBarTitleText": "Recite",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#999",
+    "selectedColor": "#ff2d4a",
+    "backgroundColor": "#fafafa",
+    "position": "bottom",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "查询"
+      },
+      {
+        "pagePath": "pages/recite/recite",
+        "text": "生词本"
+      }
+    ]
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

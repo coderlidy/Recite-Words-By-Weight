@@ -1,2 +1,25 @@
 <!--pages/recite.wxml-->
-<text>pages/recite.wxml</text>
+<view class="container">
+  <popup id='popup' 
+      k="{{popwindow.k}}"
+      v="{{popwindow.v}}"
+      btn_inc="+1"
+      btn_sub="-1"
+      bind:popup_inc="popwindow_inc"  
+      bind:popup_sub="popwindow_sub">
+  </popup>
+</view>
+
+<view class="table">
+  <view class="tr_first bg-w">
+    <view class="th">head1</view>
+    <view class="th">head2</view>
+    <view class="th ">head3</view>
+  </view>
+  <block wx:for="{{words}}" wx:key="k">
+    <view class="tr" data-item="{{item}}" data-item="{{item}}" bindtap="wordClick">
+      <row k="{{item.k}}" v="{{item.v}}"></row>
+    </view>
+  </block>
+</view>
+

@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "popup": "../../component/popup/popup",
+    "row": "../../component/row/row"
+  }
 }

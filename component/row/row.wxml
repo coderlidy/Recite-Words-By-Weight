@@ -1,0 +1,3 @@
+<!--component/row/row.wxml-->
+<view class="td_k">{{k}}</view>
+<view class="td_v">{{v}}</view>

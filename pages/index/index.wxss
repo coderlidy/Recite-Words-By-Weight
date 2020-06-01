@@ -54,41 +54,19 @@
   display: flex;
   width: 100%;
   justify-content: center;
-  height: 3rem;
+  height: 13vw;
   align-items: center;
+  
 }
 .tr {
   display: block;/* 元素垂直排列*/
   width: 100%;
   justify-content: center;
-  height: 3rem;
+  height: 15vw;
   align-items: center;
+  
 }
-.td_k {
-  width:100%;
-  justify-content: center;
-  text-align: left;
-  overflow : hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;/* 文本单行省略*/
-  -webkit-box-orient: vertical;
-  word-break: break-all; /* 可能是文本单行省略需要的额外属性 */
-  font-size: 20px;
-}
-.td_v {
-  width:100%;
-  justify-content: center;
-  text-align: left;
-  overflow : hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;/* 文本单行省略*/
-  -webkit-box-orient: vertical;
-  word-break: break-all; /* 可能是文本单行省略需要的额外属性 */
-  font-size: 16px;
-  color: #09BB07
-}
+
 .bg-w{
   background: snow;
 }

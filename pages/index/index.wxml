@@ -17,12 +17,10 @@
   </view>
   <block wx:for="{{words}}" wx:key="k">
     <view class="tr bg-g" wx:if="{{index % 2 == 0}}" data-item="{{item}}" bindtap="wordClick">
-      <view class="td_k">{{item.k}}</view>
-      <view class="td_v">{{item.v}}</view>
+      <row k="{{item.k}}" v="{{item.v}}"></row>
     </view>
     <view class="tr" wx:else data-item="{{item}}" bindtap="wordClick">
-      <view class="td_k">{{item.k}}</view>
-      <view class="td_v">{{item.v}}</view>
+      <row k="{{item.k}}" v="{{item.v}}"></row>
     </view>
   </block>
 </view>

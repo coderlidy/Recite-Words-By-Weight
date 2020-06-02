@@ -25,7 +25,12 @@ Component({
     btn_inc: {
       type: String,
       value: '确定'
-    }
+    },
+    // 弹窗蒙版高度
+    top: {
+      type: String,
+      value: '0px'
+    },
   },
 
   /**
@@ -43,14 +48,15 @@ Component({
     hidePopup: function () {
       console.log("popup_hidePopup");
       this.setData({
-        flag: !this.data.flag
+        flag: true
       })
     },
+    
     //展示弹框
     showPopup() {
       console.log("popup_showPopup");
       this.setData({
-        flag: !this.data.flag
+        flag: false
       })
     },
     /*

@@ -1,6 +1,5 @@
 /* pages/recite.wxss */
 /**列表样式**/
-
 .table {
   border: 0px solid darkgray;
 }

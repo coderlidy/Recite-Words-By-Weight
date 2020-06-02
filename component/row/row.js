@@ -12,6 +12,14 @@ Component({
         type:String,
         value:''
       },
+      count:{
+        type:String,
+        value:''
+      },
+      hide_v:{
+        type:Boolean,
+        value:false
+      },
   },
 
   /**

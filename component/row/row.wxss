@@ -10,7 +10,8 @@
   -webkit-box-orient: vertical;
   word-break: break-all; /* 可能是文本单行省略需要的额外属性 */
   font-size: 6vw;
-  margin-left: 1vw
+  margin-left: 1vw;
+  
 }
 .td_v {
   width:100%;
@@ -25,4 +26,11 @@
   font-size: 4vw;
   color: #09BB07;
   margin-left: 1vw
+}
+.line{
+  margin-top: 1vw;
+  margin-left: 2vw;
+  margin-right: 2vw;
+  height: 0.5vw;
+  background-color:cadetblue;
 }

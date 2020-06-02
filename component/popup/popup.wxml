@@ -1,11 +1,13 @@
 <!--component/popup.wxml-->
-<view class="wx-popup" hidden="{{flag}}">
+<view class="wx-popup" style="top:{{top}}" catchtouchmove='true' bindtap="hidePopup" hidden="{{flag}}">
   <view class='popup-container'>
-    <view class="wx-popup-title">{{k}}</view>
-    <view class="wx-popup-con">{{v}}</view>
+    <view >
+      <view class="wx-popup-title">{{k}}</view>
+      <view class="wx-popup-con">{{v}}</view>
+    </view>
     <view class="wx-popup-btn">
-      <text class="btn-no" bindtap='_inc'>{{btn_inc}}</text>
-      <text class="btn-ok" bindtap='_sub'>{{btn_sub}}</text>
+      <text bindtap='_inc'>{{btn_inc}}</text>
+      <text bindtap='_sub'>{{btn_sub}}</text>
     </view>
   </view>
 </view>

@@ -21,11 +21,6 @@
       <row k="{{item.k}}" v="{{item.v}}" count="{{item.count == 0?'':item.count}}" hide_v="{{row_hide_v}}"></row>
     </view>
   </block>
-  <block wx:for="{{words}}" wx:key="k">
-    <view class="tr" data-item="{{item}}" data-item="{{item}}" bindtap="wordClick">
-      <row k="{{item.k}}" v="{{item.v}}" count="{{item.count == 0?'':item.count}}" hide_v="{{row_hide_v}}"></row>
-    </view>
-  </block>
 </view>
 
 

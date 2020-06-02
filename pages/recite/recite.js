@@ -16,7 +16,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    words: [{ 'k': 'kkkk', 'v': 'vvvv'},],
+    words: [],
     row_hide_v:false,
     popwindow:{
       k:'',

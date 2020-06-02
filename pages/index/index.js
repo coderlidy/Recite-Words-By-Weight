@@ -9,7 +9,7 @@ const _ = wx.cloud.database({
 }).command;
 Page({
   data:{
-    words:[{'k':'kkkk','v':'vvvv'},]
+    words: [],
   },
   word_input: function (e) {
     wx.request({

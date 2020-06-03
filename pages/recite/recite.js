@@ -17,20 +17,58 @@ Page({
    */
   data: {
     words: [],
-    row_hide_v:false,
+    //翻译可视设置
     popwindow:{
       k:'',
       v:'',
       _id:'',
       top:'0px'
     },
+    //界面设置
+    set:{
+      row_hide_v:false,//是否显示翻译
+      time_order:false,//是否按时间排序
+    },
   },
-  
+  findAllBySet(){
+    if(this.data.set.time_order){
+      this.findAllCore(0,[],words.orderBy('date', 'desc'));
+    }else{
+      this.findAllCore(0,[],words.orderBy('count', 'desc'));
+    }
+  },
+  //使用递归突破只能查询20条限制
+  findAllCore(i,data,collection){
+    console.log('开始',i);
+    var that=this;
+    collection.skip(i).get({
+      success: function (res) {
+        // res.data 是一个包含集合中有权限访问的所有记录的数据，不超过 20 条
+        if(res.data.length!=0){
+          data =data.concat(res.data);
+          console.log('成功',i);
+          that.findAllCore(i+=20,data,collection);
+        }else {
+          that.setData({
+            words: data
+          });
+          console.log('结束,数据量:',data.length);
+        }
+      },
+      fail() {
+        wx.showToast({
+          title: "查询失败",
+          icon: 'none',
+          duration: 2000
+        });
+      }
+    });
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    
   },
 
   /**
@@ -39,20 +77,7 @@ Page({
   onReady: function () {
     //通过id搜索页面组件获得popup组件
     this.popup = this.selectComponent("#popup");
-    console.log(this);
-    this.findAll();
-  },
-  //按count降序desc排列
-  findAll(){
-    var that=this;
-    words.orderBy('count', 'desc').get({
-      success: function (res) {
-        // res.data 是一个包含集合中有权限访问的所有记录的数据，不超过 20 条
-        that.setData({
-          words: res.data
-        });
-      }
-    });
+    this.findAllCore(0,[],words.orderBy('count', 'desc'));
   },
   //通过监听页面滚动位置来自定义弹窗高度
   onPageScroll:function(e){
@@ -73,27 +98,38 @@ Page({
   //是否显示翻译
   switch1Change(e){
     this.setData({
-      row_hide_v:e.detail.value?true:false,
+      'set.row_hide_v':e.detail.value,
     });
-    this.findAll();
+  },
+  switch2Change(){
+    this.findAllBySet();
   },
   //最近的排前面
   switch3Change(e){
-    if(e.detail.value){
-      var that=this;
-      words.orderBy('date', 'desc').get({
-        success: function (res) {
-          // res.data 是一个包含集合中有权限访问的所有记录的数据，不超过 20 条
-          that.setData({
-            words: res.data
-          });
-        }
-      });
-    }else{
-      this.findAll();
-    }
+    this.setData({
+      'set.time_order':e.detail.value,
+    });
+    this.findAllBySet();
   },
-  
+  popwindow_remove(){
+      //删除数据
+    words.doc(this.data.popwindow._id).remove({
+      success: function (res) {
+        wx.showToast({
+          title: "删除成功",
+          icon: 'none',
+          duration: 2000
+        });
+      },
+      fail(res) {
+        wx.showToast({
+          title: "删除失败",
+          icon: 'none',
+          duration: 2000
+        });
+      }
+    });
+  },
   //加权按钮点击后传递到父组件来调用该方法
   popwindow_inc() {
     this.popup.hidePopup();
@@ -148,7 +184,15 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    words.count({
+      success: function(res) {
+        wx.setTabBarItem({
+          index: 1,
+          text:'生词本 '+res.total,
+        })
+      },
+      fail: console.error
+    })
   },
 
   /**

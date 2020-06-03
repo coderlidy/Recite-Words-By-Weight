@@ -6,8 +6,9 @@
       <view class="wx-popup-con">{{v}}</view>
     </view>
     <view class="wx-popup-btn">
-      <text bindtap='_inc'>{{btn_inc}}</text>
+      <text bindtap='_remove'>删除</text>
       <text bindtap='_sub'>{{btn_sub}}</text>
+      <text bindtap='_inc'>{{btn_inc}}</text>
     </view>
   </view>
 </view>

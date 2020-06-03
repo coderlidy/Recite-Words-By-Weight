@@ -70,6 +70,10 @@ Component({
     _sub() {
       //触发成功回调
       this.triggerEvent("popup_sub");
+    },
+    _remove(){
+      //触发成功回调
+      this.triggerEvent("popup_remove");
     }
   }
 })

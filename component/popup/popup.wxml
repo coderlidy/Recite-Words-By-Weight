@@ -3,7 +3,7 @@
   <view class='popup-container'>
     <view >
       <view class="wx-popup-title">{{k}}</view>
-      <view class="wx-popup-con">{{v}}</view>
+      <view class="wx-popup-con"><text>{{v}}</text></view>
     </view>
     <view class="wx-popup-btn">
       <text bindtap='_remove'>删除</text>

@@ -26,7 +26,7 @@ Page({
           this.setData({
             words:result.data.data
           });
-          //console.log(this.data.words);
+          console.log(this.data.words);
         } else {
           wx.showToast({
             title: "请求失败! HTTP码:" + result.statusCode,
@@ -45,6 +45,7 @@ Page({
     })
   },
   wordClick: function (e) {
+    var that=this;
     // 通过 currentTarget 获取传递进来的值，前端用data-参数名
     //console.log(e);
     //先查询数据库看有没有这个单词
@@ -107,9 +108,11 @@ Page({
             }
           });
         };
+        that.setData({
+          input_focus:true
+        })
       }
     })
-    
   },
   /**
    * 生命周期函数--监听页面显示

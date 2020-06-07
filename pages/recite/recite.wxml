@@ -10,7 +10,6 @@
     bind:popup_remove="popwindow_remove">
 </popup>
 
-
 <view class="table">
   <view class="tr_first_first ">
     <view class="th">显示翻译</view>

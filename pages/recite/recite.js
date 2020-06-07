@@ -52,6 +52,7 @@ Page({
           that.setData({
             words: data
           });
+          wx.hideLoading();
           console.log('结束,数据量:',data.length);
         }
       },
@@ -93,6 +94,7 @@ Page({
         top:popwindow_top+'px'
       }
     });
+    //显示弹窗
     this.popup.showPopup();
   },
   //单词是否显示翻译
@@ -109,20 +111,19 @@ Page({
     this.setData({
       'set.time_order':e.detail.value,
     });
-    this.findAllBySet();
+    this.onShow();
   },
   popwindow_remove(){
     var that=this;
       //删除数据
     words.doc(this.data.popwindow._id).remove({
       success: function (res) {
-        that.onReady();
+        that.onShow();
         wx.showToast({
           title: "删除成功",
           icon: 'none',
           duration: 2000
         });
-        
       },
       fail(res) {
         wx.showToast({
@@ -173,6 +174,7 @@ Page({
           icon: 'none',
           duration: 2000
         });
+
       },
       fail(res) {
         wx.showToast({
@@ -187,6 +189,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    wx.showLoading({
+      title: '加载中',
+    })
     words.count({
       success: function(res) {
         wx.setTabBarItem({

@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/recite/recite",
     "pages/index/index",
+    "pages/recite/recite",
+    
     "pages/logs/logs"
     
   ],

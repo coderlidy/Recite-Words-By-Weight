@@ -5,7 +5,7 @@
     <!-- 搜索框 -->
         <view class="weui-search-bar__box">
             <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
-            <input type="text" bindinput="word_input" class="weui-search-bar__input" placeholder="输入要翻译的单词或文本"/>
+            <input type="text" bindinput="word_input" focus="{{input_focus}}" class="weui-search-bar__input" placeholder="输入要翻译的单词或文本"/>
         </view>
     </view>
 </view>

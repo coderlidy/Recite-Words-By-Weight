@@ -10,6 +10,7 @@ const _ = wx.cloud.database({
 Page({
   data:{
     words: [],
+    input_focus:true
   },
   word_input: function (e) {
     wx.request({
@@ -34,6 +35,13 @@ Page({
           });
         }
       },
+      fail(e){
+        wx.showToast({
+          title: "请求失败！",
+          icon: 'none',
+          duration: 2000
+        });
+      }
     })
   },
   wordClick: function (e) {
@@ -102,5 +110,13 @@ Page({
       }
     })
     
+  },
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    this.setData({
+      input_focus:true
+    });
   },
 })

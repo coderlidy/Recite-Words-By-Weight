@@ -26,7 +26,7 @@ Page({
     },
     //界面设置
     set:{
-      row_hide_v:false,//是否显示翻译
+      row_hide_v:true,//是否隐藏翻译view
       time_order:false,//是否按时间排序
     },
   },
@@ -77,13 +77,13 @@ Page({
   onReady: function () {
     //通过id搜索页面组件获得popup组件
     this.popup = this.selectComponent("#popup");
-    this.findAllCore(0,[],words.orderBy('count', 'desc'));
   },
   //通过监听页面滚动位置来自定义弹窗高度
   onPageScroll:function(e){
     //console.log(e.scrollTop) //这个就是滚动到的位置,可以用这个位置来写判断
     popwindow_top=e.scrollTop;
   },
+  //点击单词时
   wordClick(e){
     this.setData({
       popwindow:{
@@ -95,16 +95,16 @@ Page({
     });
     this.popup.showPopup();
   },
-  //是否显示翻译
+  //单词是否显示翻译
   switch1Change(e){
     this.setData({
-      'set.row_hide_v':e.detail.value,
+      'set.row_hide_v':!e.detail.value,
     });
   },
   switch2Change(){
-    this.findAllBySet();
+    this.onShow();
   },
-  //最近的排前面
+  //最近的单词排前面
   switch3Change(e){
     this.setData({
       'set.time_order':e.detail.value,
@@ -112,14 +112,17 @@ Page({
     this.findAllBySet();
   },
   popwindow_remove(){
+    var that=this;
       //删除数据
     words.doc(this.data.popwindow._id).remove({
       success: function (res) {
+        that.onReady();
         wx.showToast({
           title: "删除成功",
           icon: 'none',
           duration: 2000
         });
+        
       },
       fail(res) {
         wx.showToast({
@@ -192,7 +195,8 @@ Page({
         })
       },
       fail: console.error
-    })
+    });
+    this.findAllBySet();
   },
 
   /**

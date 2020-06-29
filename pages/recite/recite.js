@@ -3,6 +3,7 @@
 const words = wx.cloud.database({
   env: getApp().globalData.database
 }).collection(getApp().globalData.collection);
+console.log("操作的数据库："+getApp().globalData.collection);
 //数据库 API 还提供了一系列的更新指令用于执行更复杂的更新操作，更新指令可以通过 db.command 取得
 const _ = wx.cloud.database({
   env: getApp().globalData.database
@@ -39,21 +40,21 @@ Page({
   },
   //使用递归突破只能查询20条限制
   findAllCore(i,data,collection){
-    console.log('开始',i);
+    //console.log('开始',i);
     var that=this;
     collection.skip(i).get({
       success: function (res) {
         // res.data 是一个包含集合中有权限访问的所有记录的数据，不超过 20 条
         if(res.data.length!=0){
           data =data.concat(res.data);
-          console.log('成功',i);
+          //console.log('成功',i);
           that.findAllCore(i+=20,data,collection);
         }else {
           that.setData({
             words: data
           });
           wx.hideLoading();
-          console.log('结束,数据量:',data.length);
+          //console.log('结束,数据量:',data.length);
         }
       },
       fail() {
@@ -78,6 +79,7 @@ Page({
   onReady: function () {
     //通过id搜索页面组件获得popup组件
     this.popup = this.selectComponent("#popup");
+    
   },
   //通过监听页面滚动位置来自定义弹窗高度
   onPageScroll:function(e){
@@ -118,12 +120,13 @@ Page({
       //删除数据
     words.doc(this.data.popwindow._id).remove({
       success: function (res) {
-        that.onShow();
+        that.popup.hidePopup();
         wx.showToast({
           title: "删除成功",
           icon: 'none',
           duration: 2000
         });
+        that.onShow();
       },
       fail(res) {
         wx.showToast({
@@ -136,7 +139,8 @@ Page({
   },
   //加权按钮点击后传递到父组件来调用该方法
   popwindow_inc() {
-    this.popup.hidePopup();
+    var that=this;
+    that.popup.hidePopup();
     //更新数据库，加权
     words.doc(this.data.popwindow._id).update({
       data: {
@@ -161,7 +165,8 @@ Page({
   },
   //减权按钮点击后传递到父组件来调用该方法
   popwindow_sub() {
-    this.popup.hidePopup();
+    var that=this;
+    that.popup.hidePopup();
     //更新数据库，减权
     words.doc(this.data.popwindow._id).update({
       data: {
@@ -185,10 +190,37 @@ Page({
       }
     });
   },
+  popwindow_textarea_yes(e){
+    var that=this;
+    console.log(e.detail);
+    //更新数据库，v
+    words.doc(this.data.popwindow._id).update({
+      data: {
+        v: e.detail
+      },
+      success: function (res) {
+        that.popup.hidePopup();
+        wx.showToast({
+          title: "修改成功",
+          icon: 'none',
+          duration: 2000
+        });
+        that.onShow();
+      },
+      fail(res) {
+        wx.showToast({
+          title: "修改失败！",
+          icon: 'none',
+          duration: 2000
+        });
+      }
+    });
+  },
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    //刷新
     wx.showLoading({
       title: '加载中',
     })
@@ -203,6 +235,32 @@ Page({
     });
     this.findAllBySet();
   },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   /**
    * 生命周期函数--监听页面隐藏

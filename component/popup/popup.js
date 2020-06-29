@@ -1,4 +1,5 @@
 // component/popup.js
+var textarea_value;
 Component({
   options: {
     multipleSlots: true // 在组件定义时的选项中启用多slot支持
@@ -38,6 +39,7 @@ Component({
    */
   data: {
     flag: true,
+    textarea_flag:true,
   },
 
   /**
@@ -48,10 +50,13 @@ Component({
     hidePopup: function () {
       console.log("popup_hidePopup");
       this.setData({
-        flag: true
+        flag: true,
+        textarea_flag:true,
       })
     },
-    
+    hide: function () {
+      console.log("抓住点击");
+    },
     //展示弹框
     showPopup() {
       console.log("popup_showPopup");
@@ -74,6 +79,23 @@ Component({
     _remove(){
       //触发成功回调
       this.triggerEvent("popup_remove");
+    },
+    _longpress() {
+      this.setData({
+        textarea_flag:false,
+      });
+    },
+    _no(){
+      this.setData({
+        textarea_flag:true,
+      });
+    },
+    _yes(){
+      //触发成功回调
+      this.triggerEvent("popup_textarea_yes",textarea_value);
+    },
+    _textarea_bindinput(e){
+      textarea_value=e.detail.value;
     }
   }
 })

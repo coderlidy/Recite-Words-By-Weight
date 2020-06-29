@@ -31,6 +31,9 @@
   margin: 60rpx 10rpx;
   text-align: center;
 }
+.wx-popup-textarea{
+  width: inherit;
+}
 .wx-popup-btn {
   display: flex;
   justify-content: space-around;

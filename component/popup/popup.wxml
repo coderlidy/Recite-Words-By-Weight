@@ -1,11 +1,18 @@
 <!--component/popup.wxml-->
-<view class="wx-popup" style="top:{{top}}" catchtouchmove='true' bindtap="hidePopup" hidden="{{flag}}">
-  <view class='popup-container'>
+<view class="wx-popup" style="top:{{top}}" catchtouchmove='true' bindtap="hidePopup"  hidden="{{flag}}">
+  <view class='popup-container' catchtap="hide">
     <view >
       <view class="wx-popup-title">{{k}}</view>
-      <view class="wx-popup-con"><text>{{v}}</text></view>
+      <view class="wx-popup-con" bindlongpress='_longpress' hidden="{{!textarea_flag}}"><text>{{v}}</text></view>
     </view>
-    <view class="wx-popup-btn">
+    <view hidden="{{textarea_flag}}">
+      <view class="wx-popup-con" ><textarea bindinput="_textarea_bindinput" class="wx-popup-textarea" auto-height="true"  value="{{v}}" /></view>
+      <view class="wx-popup-btn" >
+        <text bindtap='_no'>取消</text>
+        <text bindtap='_yes'>确定</text>
+      </view>
+    </view>
+    <view class="wx-popup-btn" hidden="{{!textarea_flag}}">
       <text bindtap='_remove'>删除</text>
       <text bindtap='_sub'>{{btn_sub}}</text>
       <text bindtap='_inc'>{{btn_inc}}</text>

@@ -7,7 +7,8 @@
     btn_sub="-1"
     bind:popup_inc="popwindow_inc" 
     bind:popup_sub="popwindow_sub"
-    bind:popup_remove="popwindow_remove">
+    bind:popup_remove="popwindow_remove"
+    bind:popup_textarea_yes="popwindow_textarea_yes">
 </popup>
 
 <view class="table">
@@ -22,7 +23,7 @@
     <view class="th"><switch checked="" bindchange="switch3Change"/></view>
   </view>
   <block wx:for="{{words}}" wx:key="k">
-    <view class="tr" data-item="{{item}}" data-item="{{item}}" bindtap="wordClick">
+    <view class="tr" data-item="{{item}}" bindtap="wordClick">
       <row k="{{item.k}}" v="{{item.v}}" count="{{item.count == 0?'':item.count}}" hide_v="{{set.row_hide_v}}"></row>
     </view>
   </block>

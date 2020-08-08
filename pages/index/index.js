@@ -3,37 +3,30 @@
 const words = wx.cloud.database({
   env: getApp().globalData.database
 }).collection(getApp().globalData.collection);
+const englishs = wx.cloud.database({
+  env: getApp().globalData.database
+}).collection(getApp().globalData.collection2);
 //数据库 API 还提供了一系列的更新指令用于执行更复杂的更新操作，更新指令可以通过 db.command 取得
 const _ = wx.cloud.database({
   env: getApp().globalData.database
 }).command;
 Page({
   data:{
-    words: [],
+    words: {},
     input_focus:true
   },
   word_input: function (e) {
-    wx.request({
-      method:"POST",
-      header: {
-        'content-type':'application/x-www-form-urlencoded'
-      },
-      data: { "kw": e.detail.value},
-      url: 'https://fanyi.baidu.com/sug',
+    console.log("还好意思讲");
+    englishs.where({	 	
+      word:{
+        $regex:'^'+ e.detail.value,
+        $options: 'i'
+      }
+    }).get({
       success: (result) => {
-        //console.log(result);
-        if (result.statusCode == 200 && result.data != null) {
-          this.setData({
-            words:result.data.data
-          });
-          console.log(this.data.words);
-        } else {
-          wx.showToast({
-            title: "请求失败! HTTP码:" + result.statusCode,
-            icon: 'none',
-            duration: 2000
-          });
-        }
+        console.log(result);
+        this.arrayToWords(result.data);
+        console.log(this.data.words);
       },
       fail(e){
         wx.showToast({
@@ -43,6 +36,16 @@ Page({
         });
       }
     })
+  },
+  arrayToWords(arr){
+    var array=[];
+    for(let j = 0; j < arr.length; j++) {
+      console.log(arr[j].word)
+      array.push({"k":arr[j].word,"v":arr[j].translation});
+    }
+    this.setData({
+      words:array
+    });
   },
   wordClick: function (e) {
     var that=this;

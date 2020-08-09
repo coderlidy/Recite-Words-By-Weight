@@ -6,7 +6,7 @@
       <view class="wx-popup-con" bindlongpress='_longpress' hidden="{{!textarea_flag}}"><text>{{v}}</text></view>
     </view>
     <view hidden="{{textarea_flag}}">
-      <view class="wx-popup-con" ><textarea bindinput="_textarea_bindinput" class="wx-popup-textarea" auto-height="true"  value="{{v}}" /></view>
+      <view class="wx-popup-con" ><textarea bindinput="_textarea_bindinput" class="wx-popup-textarea" value="{{v}}" /></view>
       <view class="wx-popup-btn" >
         <text bindtap='_no'>取消</text>
         <text bindtap='_yes'>确定</text>
